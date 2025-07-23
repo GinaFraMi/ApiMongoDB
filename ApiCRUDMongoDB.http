@@ -1,0 +1,6 @@
+@ApiCRUDMongoDB_HostAddress = http://localhost:5041
+
+GET {{ApiCRUDMongoDB_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

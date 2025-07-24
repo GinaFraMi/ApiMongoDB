@@ -32,6 +32,7 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post(User newUser)
     {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
         await _userService.CreateUser(newUser);
         return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
     }
@@ -39,6 +40,8 @@ public class UserController : ControllerBase
     [HttpPut("{id:length(24)}")]
     public async Task<IActionResult> Update(string id, User updatedUser)
     {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
         var user = await _userService.GetUser(id);
         if (user is null)
         {

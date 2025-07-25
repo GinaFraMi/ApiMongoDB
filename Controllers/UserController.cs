@@ -15,7 +15,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<List<User>> Get()
     {
-       return await _userService.GetAllUser();
+        return await _userService.GetAllUser();
     }
 
     [HttpGet("{id:length(24)}")]
@@ -62,5 +62,12 @@ public class UserController : ControllerBase
         }
         await _userService.DeleteUser(id);
         return NoContent();
+    }
+
+    [HttpGet("filter")]
+    public async Task<List<User>> FilterUsers([FromQuery] string prop, [FromQuery] string value, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+    {
+        var users = await _userService.FilterUsers(prop, value, page, pageSize);
+        return users;
     }
 }
